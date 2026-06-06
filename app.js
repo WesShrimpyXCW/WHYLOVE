@@ -57,7 +57,7 @@ const results = {
 
 const optionLabels = ["非常赞同", "赞同", "有点赞同", "中立", "有点反对", "反对", "非常反对"];
 const optionScores = [6, 5, 4, 3, 2, 1, 0];
-const RESULT_LINK_OVERRIDE = "";
+const RESULT_LINK_OVERRIDE = "https://wesshrimpyxcw.github.io/WHYLOVE/";
 let currentIndex = 0;
 let answers = Array(questions.length).fill(null);
 let shuffledIndices = shuffleQuestions();
