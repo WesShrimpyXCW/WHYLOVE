@@ -1,0 +1,447 @@
+const questions = [
+  { dimension: "生理", text: "我非常想要被拥抱、被亲吻、被爱抚。" },
+  { dimension: "生理", text: "当我喜欢一个人时，我对TA的幻想中带有着相当一部分的性幻想。" },
+  { dimension: "生理", text: "坦白来讲，我觉得我是一个颜控。" },
+
+  { dimension: "浪漫", text: "有时候我会觉得，表白前的拉扯和朦胧中的期待比谈恋爱更有趣。" },
+  { dimension: "浪漫", text: "我总是忍不住幻想牵手、说悄悄话、互相喂食、整理头发这样情侣之间的亲昵举动。" },
+  { dimension: "浪漫", text: "我常常在生活中突然crush某一个陌生人。" },
+
+  { dimension: "陪伴", text: "我认为两个人经常互相分享和吐槽生活琐事是暧昧的。" },
+  { dimension: "陪伴", text: "我希望有一个人和我做一样的事，一起吃饭、一起运动或者一起学习工作。" },
+  { dimension: "陪伴", text: "当我感到伤心和痛苦的时候，我希望有一个伴侣能来陪陪我。" },
+
+  { dimension: "社会认同", text: "得知我的朋友/我曾经的暧昧对象谈恋爱，会让我感到痛苦或焦虑。" },
+  { dimension: "社会认同", text: "长期单身会给我一种自己已经落后了的感觉。" },
+  { dimension: "社会认同", text: "我往往在周围绯闻纷飞的时候更想谈恋爱。" },
+
+  { dimension: "自我价值", text: "我觉得我参与了很多有趣/有意义的事，值得我去向TA分享。" },
+  { dimension: "自我价值", text: "我总是想要追求外貌/精神/身体/智慧上的优秀，并认为只有如此优秀才配得上心中的那个TA。" },
+  { dimension: "自我价值", text: "我很享受被人爱慕和追求的感觉（如果有的话），这让我感到自己被重视。" },
+
+  { dimension: "创伤", text: "有时候，我喜欢一个人是因为从TA的身上看到了曾经的自己。" },
+  { dimension: "创伤", text: "当有人持续关注我时，我很容易对TA产生依赖感。" },
+  { dimension: "创伤", text: "我发现，我喜欢的类型总是和我的初恋/前任相似。" },
+];
+
+const results = {
+  "生理": {
+    phrase: "渴望一具美丽的肉体",
+    analysis: "交配和繁衍，生命最底层的追求。旺盛的欲望驱使你对他人产生渴求的情愫。当你说你喜欢一个人时，你总是先在是身体和感官层面受到吸引，然后大脑才开始为这种吸引寻找正当理由。向你的朋友分享这个测试结果也许会让你的声誉万劫不复，但你可能也正期待着这样做会带来意外的惊喜，你确定要这么做吗？",
+  },
+  "浪漫": {
+    phrase: "对心跳加速上瘾",
+    analysis: "平淡的生活，总是需要一些激情作为调剂。你也许已经发现了，你对那种脸红心跳的感觉上瘾，你总是要在对一段关系的期待中才能找到生活的动力。伴侣是谁、是什么样的人对你来说也许并不是那么的重要。你需要的只是一个对抗无聊的调味品、一个度过无趣的充电宝。",
+  },
+  "陪伴": {
+    phrase: "想要一个专属情绪出口",
+    analysis: "作为一种社会动物，人总是会害怕孤独。你想要一个能长期陪伴在你身边的人、一个总是在第一时间出现的人、一个忠实地把你放在心中的人。不知道你是否认真想过，你需要的究竟是一个恋人、一个朋友，还是一个树洞、一只鹦鹉、一只狗或是一个情绪垃圾桶？",
+  },
+  "社会认同": {
+    phrase: "把谈恋爱当成了一项任务",
+    analysis: "你生活中的朋友，可能十三四岁就遇到了自己的初恋；你看的网剧里，可能十五六岁就已经有了丰富的经验；你刷的社交媒体上，可能正在散布“XXX之前必须谈一场恋爱”的言论……这一切都在潜移默化中给你带来了巨大的压力，让你怀疑自己的不正常、让你担心错过了恋爱的最佳时机。与其说你是想要谈恋爱，倒不如说，你正在过一段被无数个“关键节点”绑架的人生。",
+  },
+  "自我价值": {
+    phrase: "希望自己的优秀被欣赏",
+    analysis: "是的，你可能自认为有着不错的颜值和身材、独到的见解和创意、傲人的业绩和成绩、优秀的精神和品格，可是在你心中，这一切距离“成功”还差一个有力的证明。你其实根本不在乎TA与你性格是否匹配、观念是否一致，你只是觉得TA匹配得上你的优秀、应该爱上你。对你而言，爱情不过是去寻找那颗足够璀璨夺目的宝石，以此来彰显你本人的华丽。",
+  },
+  "创伤": {
+    phrase: "想要缓解过去的创伤",
+    analysis: "也许你自己并没有发现，或是不承认，但事实上，你对恋爱的需求来源于那些你曾经受过的伤。你试图一段关系，去给那些没有得到回应的需求、没有被满足的期待、没有完成的告别找到出口。于是你会发现自己对某些人异常执着，对某些情境异常敏感。你以为自己在追逐未来，其实有一部分自己始终在试图改写过去。",
+  },
+  "当所有维度均低于50%": {
+    phrase: "没那么想谈恋爱",
+    analysis: "你为什么要做这个测试？好友推荐、偶然刷到还是纯属无聊？你似乎并没有强烈的想要谈恋爱的意愿，或是已经身处一段长期而稳定的关系之中。你的平和令人嫉妒，你的冷静令人敬畏。",
+  },
+};
+
+const optionLabels = ["非常赞同", "赞同", "有点赞同", "中立", "有点反对", "反对", "非常反对"];
+const optionScores = [6, 5, 4, 3, 2, 1, 0];
+const RESULT_LINK_OVERRIDE = "https://wesshrimpyxcw.github.io/WHYLOVE/";
+let currentIndex = 0;
+let answers = Array(questions.length).fill(null);
+let shuffledIndices = shuffleQuestions();
+let latestRanked = [];
+
+const screens = document.querySelectorAll(".screen");
+const totalQuestions = document.querySelector("#totalQuestions");
+const currentQuestion = document.querySelector("#currentQuestion");
+const progressFill = document.querySelector("#progressFill");
+const dimensionLabel = document.querySelector("#dimensionLabel");
+const questionText = document.querySelector("#questionText");
+const options = document.querySelector("#options");
+const resultUrl = document.querySelector("#resultUrl");
+const resultTitle = document.querySelector("#resultTitle");
+const analysisText = document.querySelector("#analysisText");
+const radarCanvas = document.querySelector("#radarChart");
+const prevQuestionButton = document.querySelector("#prevQuestionButton");
+
+totalQuestions.textContent = String(questions.length);
+
+function shuffleQuestions() {
+  const indices = [...Array(questions.length).keys()];
+  for (let index = indices.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [indices[index], indices[swapIndex]] = [indices[swapIndex], indices[index]];
+  }
+  return indices;
+}
+
+function showScreen(name) {
+  screens.forEach((screen) => {
+    screen.classList.toggle("is-active", screen.dataset.screen === name);
+  });
+}
+
+function renderQuestion() {
+  const questionIndex = shuffledIndices[currentIndex];
+  const question = questions[questionIndex];
+  currentQuestion.textContent = String(currentIndex + 1);
+  progressFill.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+  dimensionLabel.textContent = question.dimension;
+  questionText.textContent = question.text;
+  options.innerHTML = "";
+  prevQuestionButton.disabled = currentIndex === 0;
+
+  optionLabels.forEach((label, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option-button";
+    button.textContent = label;
+    button.classList.toggle("is-selected", answers[questionIndex] === optionScores[index]);
+    button.addEventListener("click", () => {
+      answers[questionIndex] = optionScores[index];
+      renderQuestion();
+      window.setTimeout(() => {
+        if (currentIndex < questions.length - 1) {
+          currentIndex += 1;
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      }, 220);
+    });
+    options.appendChild(button);
+  });
+}
+
+function calculateScores() {
+  const buckets = {};
+  questions.forEach((question, index) => {
+    if (!buckets[question.dimension]) {
+      buckets[question.dimension] = { total: 0, count: 0 };
+    }
+    buckets[question.dimension].total += answers[index] ?? 3;
+    buckets[question.dimension].count += 1;
+  });
+
+  return Object.entries(buckets)
+    .map(([dimension, score]) => ({
+      dimension,
+      value: score.total / score.count,
+      phrase: results[dimension].phrase,
+      analysis: results[dimension].analysis,
+    }))
+    .sort((a, b) => b.value - a.value);
+}
+
+function showResult() {
+  latestRanked = calculateScores();
+  const displayResult = getDisplayResult(latestRanked);
+  resultUrl.textContent = getResultLink();
+  resultTitle.innerHTML = displayResult.htmlTitle;
+  analysisText.textContent = displayResult.analysis;
+  showScreen("result");
+  drawRadar(latestRanked);
+}
+
+function getDisplayResult(ranked) {
+  const lowResult = results["当所有维度均低于50%"];
+  const allBelowHalf = ranked.every((entry) => entry.value < 3);
+  if (allBelowHalf) {
+    return {
+      title: lowResult.phrase,
+      htmlTitle: escapeHtml(lowResult.phrase),
+      titleLines: [lowResult.phrase],
+      analysis: lowResult.analysis,
+    };
+  }
+
+  const top = ranked[0];
+  const second = ranked[1] ?? ranked[0];
+  return {
+    title: `${top.phrase}/${second.phrase}`,
+    htmlTitle: `${escapeHtml(top.phrase)}/<br>${escapeHtml(second.phrase)}`,
+    titleLines: [`${top.phrase}/`, second.phrase],
+    analysis: top.analysis,
+  };
+}
+
+function escapeHtml(text) {
+  return text.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  })[char]);
+}
+
+function getResultLink() {
+  return RESULT_LINK_OVERRIDE || window.location.href;
+}
+
+function drawRadar(ranked) {
+  const ctx = radarCanvas.getContext("2d");
+  const size = radarCanvas.width;
+  const center = size / 2;
+  const radius = size * 0.34;
+  const dimensions = ["生理", "浪漫", "陪伴", "社会认同", "自我价值", "创伤"];
+  const values = dimensions.map((dimension) => {
+    const item = ranked.find((entry) => entry.dimension === dimension);
+    return item ? item.value / 6 : 0;
+  });
+
+  ctx.clearRect(0, 0, size, size);
+  ctx.fillStyle = "#05050d";
+  ctx.fillRect(0, 0, size, size);
+
+  ctx.strokeStyle = "rgba(119, 232, 255, 0.28)";
+  ctx.lineWidth = 1;
+  for (let ring = 1; ring <= 5; ring += 1) {
+    ctx.beginPath();
+    dimensions.forEach((_, index) => {
+      const point = pointFor(index, dimensions.length, radius * (ring / 5), center);
+      if (index === 0) ctx.moveTo(point.x, point.y);
+      else ctx.lineTo(point.x, point.y);
+    });
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  dimensions.forEach((dimension, index) => {
+    const axis = pointFor(index, dimensions.length, radius, center);
+    ctx.beginPath();
+    ctx.moveTo(center, center);
+    ctx.lineTo(axis.x, axis.y);
+    ctx.stroke();
+
+    const labelPoint = pointFor(index, dimensions.length, radius + 42, center);
+    ctx.fillStyle = "#9deeff";
+    ctx.font = "700 18px Microsoft YaHei, Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    wrapLabel(ctx, dimension, labelPoint.x, labelPoint.y);
+  });
+
+  ctx.beginPath();
+  values.forEach((value, index) => {
+    const point = pointFor(index, dimensions.length, radius * value, center);
+    if (index === 0) ctx.moveTo(point.x, point.y);
+    else ctx.lineTo(point.x, point.y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = "rgba(255, 46, 168, 0.28)";
+  ctx.fill();
+  ctx.strokeStyle = "#ff2ea8";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  values.forEach((value, index) => {
+    const point = pointFor(index, dimensions.length, radius * value, center);
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, 6, 0, Math.PI * 2);
+    ctx.fillStyle = "#ff2ea8";
+    ctx.fill();
+    ctx.strokeStyle = "#05050d";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  });
+}
+
+function pointFor(index, total, radius, center) {
+  const angle = -Math.PI / 2 + (Math.PI * 2 * index) / total;
+  return {
+    x: center + Math.cos(angle) * radius,
+    y: center + Math.sin(angle) * radius,
+  };
+}
+
+function wrapLabel(ctx, label, x, y) {
+  if (label.length <= 4) {
+    ctx.fillText(label, x, y);
+    return;
+  }
+  ctx.fillText(label.slice(0, 2), x, y - 10);
+  ctx.fillText(label.slice(2), x, y + 12);
+}
+
+async function saveResultImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1200;
+  canvas.height = 1900;
+  const ctx = canvas.getContext("2d");
+  const displayResult = getDisplayResult(latestRanked);
+  const linkText = getResultLink();
+
+  ctx.fillStyle = "#05050d";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(255, 46, 168, 0.14)";
+  ctx.fillRect(70, 80, 1060, 1740);
+  ctx.fillStyle = "#09081a";
+  ctx.fillRect(100, 110, 1000, 1680);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "700 24px Microsoft YaHei, Arial";
+  drawWrappedText(ctx, linkText, 160, 180, 880, 34);
+
+  drawSplitNeonTitle(ctx, 600, 300);
+
+  ctx.fillStyle = "#77e8ff";
+  ctx.font = "800 38px Microsoft YaHei, Arial";
+  ctx.fillText("承认吧！你只是", 160, 395);
+  ctx.fillStyle = "#ff6fc6";
+  ctx.font = "900 54px Microsoft YaHei, Arial";
+  drawResultTitleLines(ctx, displayResult.titleLines, 160, 475, 68);
+
+  ctx.fillStyle = "#e8fbff";
+  ctx.font = "400 30px Microsoft YaHei, Arial";
+  drawWrappedText(ctx, displayResult.analysis, 160, 670, 880, 48);
+
+  ctx.drawImage(radarCanvas, 315, 1120, 570, 570);
+
+  const qrCanvas = await createQrImage(linkText, 190);
+  ctx.fillStyle = "rgba(119, 232, 255, 0.1)";
+  ctx.fillRect(160, 1695, 880, 1);
+  ctx.fillStyle = "#77e8ff";
+  ctx.font = "800 26px Microsoft YaHei, Arial";
+  ctx.fillText("扫码打开测试", 160, 1740);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "700 21px Microsoft YaHei, Arial";
+  drawWrappedText(ctx, linkText, 160, 1780, 570, 30);
+
+  if (qrCanvas) {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(825, 1665, 210, 210);
+    ctx.drawImage(qrCanvas, 845, 1685, 170, 170);
+  } else {
+    ctx.strokeStyle = "rgba(119, 232, 255, 0.55)";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(825, 1665, 210, 210);
+    ctx.fillStyle = "#77e8ff";
+    ctx.font = "700 22px Microsoft YaHei, Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("二维码加载失败", 930, 1760);
+    ctx.fillText("请使用左侧链接", 930, 1798);
+    ctx.textAlign = "left";
+  }
+
+  const link = document.createElement("a");
+  link.download = "恋爱脑自测结果.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+
+function createQrImage(text, size) {
+  return new Promise((resolve) => {
+    const image = new Image();
+    const tempCanvas = document.createElement("canvas");
+    let settled = false;
+    tempCanvas.width = size;
+    tempCanvas.height = size;
+    image.crossOrigin = "anonymous";
+    const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      resolve(value);
+    };
+    window.setTimeout(() => finish(null), 4000);
+    image.onload = () => {
+      const tempCtx = tempCanvas.getContext("2d");
+      tempCtx.fillStyle = "#ffffff";
+      tempCtx.fillRect(0, 0, size, size);
+      tempCtx.drawImage(image, 0, 0, size, size);
+      try {
+        tempCanvas.toDataURL("image/png");
+        finish(tempCanvas);
+      } catch (error) {
+        finish(null);
+      }
+    };
+    image.onerror = () => finish(null);
+    image.src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=10&data=${encodeURIComponent(text)}`;
+  });
+}
+
+function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight) {
+  let line = "";
+  let currentY = y;
+  for (const char of text) {
+    const testLine = line + char;
+    if (ctx.measureText(testLine).width > maxWidth && line) {
+      ctx.fillText(line, x, currentY);
+      line = char;
+      currentY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  if (line) ctx.fillText(line, x, currentY);
+}
+
+function drawResultTitleLines(ctx, lines, x, y, lineHeight) {
+  lines.forEach((line, index) => {
+    ctx.fillText(line, x, y + index * lineHeight);
+  });
+}
+
+function drawSplitNeonTitle(ctx, centerX, y) {
+  ctx.font = "900 76px Microsoft YaHei, Arial";
+  const leftText = "恋爱脑";
+  const rightText = "自测器";
+  const leftWidth = ctx.measureText(leftText).width;
+  const rightWidth = ctx.measureText(rightText).width;
+  let x = centerX - (leftWidth + rightWidth) / 2;
+
+  ctx.shadowColor = "rgba(255, 46, 168, 0.92)";
+  ctx.shadowBlur = 26;
+  ctx.fillStyle = "#ff4fba";
+  ctx.fillText(leftText, x, y);
+
+  x += leftWidth;
+  ctx.shadowColor = "rgba(119, 232, 255, 0.92)";
+  ctx.shadowBlur = 26;
+  ctx.fillStyle = "#77e8ff";
+  ctx.fillText(rightText, x, y);
+
+  ctx.shadowBlur = 0;
+  ctx.shadowColor = "transparent";
+}
+
+document.addEventListener("click", (event) => {
+  const action = event.target.dataset.action;
+  if (!action) return;
+
+  if (action === "show-intro") showScreen("intro");
+  if (action === "start-quiz") {
+    currentIndex = 0;
+    shuffledIndices = shuffleQuestions();
+    answers = Array(questions.length).fill(null);
+    renderQuestion();
+    showScreen("quiz");
+  }
+  if (action === "back-home") showScreen("home");
+  if (action === "prev-question") {
+    currentIndex = Math.max(0, currentIndex - 1);
+    renderQuestion();
+  }
+  if (action === "restart") {
+    answers = Array(questions.length).fill(null);
+    shuffledIndices = shuffleQuestions();
+    currentIndex = 0;
+    showScreen("home");
+  }
+  if (action === "save-result") saveResultImage();
+});
+
+renderQuestion();
