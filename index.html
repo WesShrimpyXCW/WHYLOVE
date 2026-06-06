@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WHYLOVE - 恋爱脑自测器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="screen screen-home is-active" data-screen="home">
+        <header class="main-header">
+          <div class="brand-mark">WHY<span class="neon-pink">LOVE</span></div>
+          <p class="home-question">你说你想<span class="neon-pink">谈恋爱</span>，你到底是想要什么？</p>
+          <h1><span class="title-pink">恋爱脑</span><span class="title-blue">自测器</span></h1>
+        </header>
+
+        <div class="content-box center-content">
+          <button class="button large" type="button" data-action="show-intro">开始测试！</button>
+        </div>
+
+        <footer>
+          <p>&copy; 2026 WHYLOVE</p>
+        </footer>
+      </section>
+
+      <section class="screen screen-intro" data-screen="intro">
+        <div class="content-box">
+          <div class="section-number">说明</div>
+          <h2>开始之前</h2>
+          <div class="intro-text">
+            <p>你将看到一系列陈述句。对于每个陈述，请选择你对它的认同程度。</p>
+            <p>回答没有对错之分，请根据你的真实想法选择。</p>
+          </div>
+          <div class="notice">
+            <p>另外：本测试为追求娱乐性，部分内容可能攻击性较强。请不要在恋爱期间进行该测试，如果你在恋爱期间进行了该测试，请忽视一切测试结果。本测试作者只是一个没有经历过正式关系的virgin，所以如果认为测试不准，一定是你对！（欢迎在作者小红书 <span class="author-handle">@小刺猬胃出血</span> 相关帖子下方参与讨论和纠正作者的错误）</p>
+            <p>特别注意：如果你正在经历由于恋爱关系问题的高度困扰之中，本测试对于你的情况不会带来任何的缓解。如果观察到有心理问题的迹象，请及时求助于专业的心理医生。</p>
+          </div>
+          <div class="center">
+            <button class="button wide" type="button" data-action="start-quiz">我已知晓，开始测试！</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen-quiz" data-screen="quiz">
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text">第 <span id="currentQuestion">1</span> / <span id="totalQuestions">18</span> 题</div>
+        </div>
+
+        <div class="question-box">
+          <div class="dimension-label" id="dimensionLabel">维度</div>
+          <h2 class="question-text" id="questionText">问题文本</h2>
+          <div class="options-vertical" id="options"></div>
+        </div>
+
+        <div class="quiz-buttons">
+          <button class="back-button" type="button" data-action="back-home">返回首页</button>
+          <button class="back-button secondary" type="button" data-action="prev-question" id="prevQuestionButton">上一题</button>
+        </div>
+      </section>
+
+      <section class="screen screen-result" data-screen="result">
+        <div class="result-main">
+          <p class="url-line" id="resultUrl"></p>
+          <p class="match-intro">承认吧！你只是</p>
+          <h1 id="resultTitle">结果标题</h1>
+
+          <div class="analysis" id="analysisText">分析文本</div>
+
+          <div class="chart-container">
+            <canvas id="radarChart" width="420" height="420" aria-label="六个象限的雷达图"></canvas>
+          </div>
+
+          <div class="result-actions">
+            <button class="button" type="button" data-action="save-result">保存结果页图片</button>
+            <button class="button secondary" type="button" data-action="restart">重新测试</button>
+          </div>
+
+          <p class="result-discussion">欢迎在作者小红书 <span class="author-handle">@小刺猬胃出血</span> 相关帖子下方参与讨论和纠正作者的错误</p>
+        </div>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
